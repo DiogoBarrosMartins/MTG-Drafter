@@ -1,4 +1,3 @@
-/**deprecated*/
 
 define(function () {
   let externals = {};
@@ -58,16 +57,12 @@ define(function () {
     if (!elements.app) {
       elements.app = $("#app");
     }
-
     renderButton();
-
     if (cardlist) {
       for (let element of cardlist) {
         renderCardList(element);
       }
     }
-
-
   }
 
 
@@ -75,7 +70,6 @@ define(function () {
     if (elements.videoCard) {
       elements.videoCard.empty();
     }
-
     elements.videoCard = $(createCardList(cardlist));
     elements.app.append(elements.videoCard);
   }
@@ -90,10 +84,10 @@ define(function () {
           </div>`;
   }
 
-  function createCardList(cardlist) {
 
+  function createCardList(cardlist) {
     $("#cardList").append(`<div style="margin-right:10px; margin-left:10px;>
-  <p  style="margin-left:36px;"> ${cardlist.name}</p> 
+    <p style="margin-left:36px;"> ${cardlist.name}</p> 
          <img src="${cardlist.card}" </>
           
           </div>`)

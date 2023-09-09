@@ -115,7 +115,6 @@ define(function () {
             }
             elements.sideCard.html(cardHtml);
         }
-
         elements.app.append(elements.sideCard);
     };
 

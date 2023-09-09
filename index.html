@@ -2,56 +2,56 @@
 <html class="no-js" lang="">
 
 <head>
-    <meta charset="utf-8" />
-    <title>MTG SPA XD</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" />
+<title>MTG SPA XD</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="manifest" href="site.webmanifest" />
-    <link rel="apple-touch-icon" href="icon.png" />
-    <!-- Place favicon.ico in the root directory -->
+<link rel="manifest" href="site.webmanifest" />
+<link rel="apple-touch-icon" href="icon.png" />
+<!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="stylesheet" href="css/card.css" />
-    <meta name="theme-color" content="#fafafa" />
+<link rel="stylesheet" href="css/normalize.css" />
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/app.css" />
+<link rel="stylesheet" href="css/card.css" />
+<meta name="theme-color" content="#fafafa" />
 </head>
 
 <body>
-    <!-- WebApp -->
+<!-- WebApp -->
 
-    <h1>Hello</h1>
+<h1>Hello</h1>
 
-    <div id="app" style=" margin-bottom:10px;" />
-    <button id="random" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'> Random
-        Card?</button>
-    <input type="text" id="search" name="search-field"><br>
-    <button id="search-btn" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'> Search
-    </button></form>
-    <button id="clear-btn" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'>
-        Clear</button>
-    <button id="booster-btn" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'>
-        Booster</button>
+<div id="app" style=" margin-bottom:10px;" />
+<button id="random" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'> Random
+    Card?</button>
+<input type="text" id="search" name="search-field"><br>
+<button id="search-btn" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'> Search
+</button></form>
+<button id="clear-btn" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'>
+    Clear</button>
+<button id="booster-btn" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'>
+    Booster</button>
 
-    <button id="draft-btn" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'>
-        Draft</button>
+<button id="draft-btn" style='border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'>
+    Draft</button>
+</div>
+<div id="singleCard">
+    <div id="cardList" style="display:flex; flex-wrap: wrap; max-width: fit-content;align-content: flex-start; ">
     </div>
-    <div id="singleCard">
-        <div id="cardList" style="display:flex; flex-wrap: wrap; max-width: fit-content;align-content: flex-start; ">
-        </div>
-        <!-- WebApp -->
-        <script src="js/vendor/modernizr-3.7.1.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.0.min.js"
-            integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-        <script>
-            window.jQuery ||
-                document.write('<script src="js/vendor/jquery-3.4.0.min.js"><\/script>');
-        </script>
-        <script src="js/plugins.js"></script>
+    <!-- WebApp -->
+    <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script>
+        window.jQuery ||
+            document.write('<script src="js/vendor/jquery-3.4.0.min.js"><\/script>');
+    </script>
+    <script src="js/plugins.js"></script>
 
-        <script data-main="js/app/main"
-            src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js"></script>
+    <script data-main="js/app/main"
+        src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js"></script>
 </body>
 
 </html>

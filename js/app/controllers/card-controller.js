@@ -7,7 +7,6 @@ define(["views/card-view", "services/card-service"], function (view, service) {
 
   function buttonHomeHandler() {
     window.location.hash = "#home";
-
   }
 
   externals.start = function () {
