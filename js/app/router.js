@@ -1,6 +1,4 @@
-/**
- * Router Module
- */
+
 define(function () {
     let externals = {}; // module external api
     let routes = {
