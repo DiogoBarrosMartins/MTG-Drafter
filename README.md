@@ -4,7 +4,7 @@ This is a single page application to see cards from sets of Magic The Gathering!
 
 I've wasted too much money, based on this app alone, because it made me want to play MTG again! 
 
-Nonetheless, it's kinda incomplete for what I've invisioned it to be, but you can "simulate" a draft of a MTG set! 
+Nonetheless, it's (on construction!) kinda incomplete for what I've invisioned it to be, but you can "simulate" a draft of a MTG set! 
 
 It will get a revamp on the frontend, but its kinda usefull as is. 
 
