@@ -20,9 +20,12 @@ define(function () {
 
 
   function renderButton() {
-    elements.button = $("<button id='goBack'>Go back</button>");
+    elements.button = $(`
+                        <div id='btn-container'>
+                        <button id='goBack'>Go back</button>
+                        </div>`);
     elements.button.click(handlers["buttonHomeClick"]);
-    elements.app.append(elements.button);
+    elements.app.prepend(elements.button);
   }
 
 
@@ -32,13 +35,10 @@ define(function () {
 
 
   function renderCard(card) {
-    if (elements.videoCard) {
-      elements.videoCard.empty();
-    }
-    elements.videoCard = $(createCard(card));
+    elements.videoCard = $("<div class='card-view'></div>");
+    elements.videoCard.append(createCard(card));
     elements.app.append(elements.videoCard);
   }
-
 
   externals.renderMany = function (cardlist) {
     if (!elements.app) {
@@ -62,22 +62,32 @@ define(function () {
   }
 
   function createCard(card) {
+   
     return `
-      <div class="card-view-container">
-        <div class="card-image">
-          <img src="${card.card}" alt="Card image" />
+      
+          
+          ${card.art ? ` <div id='btn-container'>
+          <button id='viewArt'>View Art</button>` : ""}
         </div>
-        <div class="card-info">
-          <h2>${card.name}</h2>
-          <p>${card.flavour || "No flavour text available"}</p>
-        </div>
-        <div class="card-art">
-          ${card.art ? `<img src="${card.art}" alt="Art of ${card.name}" />` : ""}
+        <div class="card-content">
+          <div class="card-image">
+            <img src="${card.card}" alt="Card image" />
+          </div>
+          <div class="card-details">
+              <h2>${card.name}</h2>
+              <p>${card.flavour || "No flavour text available"}</p>
+            </div>
+            ${card.art ? `<div class="card-art" style="display: none;">
+                            <img src="${card.art}" alt="Art of ${card.name}" />
+                          </div>` : ""}
+          </div>
         </div>
       </div>`;
   }
   
-
+  $(document).on('click', '#viewArt', function() {
+    $('.card-art').slideToggle();
+  });
 
   function createCardList(cardlist) {
     $("#cardList").append(`

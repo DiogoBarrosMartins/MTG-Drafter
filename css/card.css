@@ -1,75 +1,52 @@
-/* Styles specific to the card view */
+
 .card-view-container {
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: center;
-  max-width: 100%;
-  padding: 1rem;
+  flex-direction: row;
+  align-items: flex-start; /* Align the items at the top */
+  max-width: 90%; /* Limit the maximum width if necessary */
+  max-height: 90%;
 }
-
-/* Media query for larger screens to position elements side by side */
-@media (min-width: 768px) {
-  .card-view-container {
-    flex-direction: row; /* Align children horizontally */
-    align-items: flex-start; /* Align items to the start */
-  }
-}
-
-.card-image img, .card-art img {
-  max-width: 100%;
-  height: auto; /* Maintain aspect ratio */
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.card-info {
-  text-align: left;
-  margin-left: 20px; /* Give some space between the card image and the text */
-  max-width: 500px; /* Max width for the text to avoid long lines on large screens */
-}
-
-/* Place the 'Go back' button at the top left corner */
-#goBack {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 10; /* Ensure it's above other content */
-}
-
-.card-details {
+.card-content {
+  /* Container for the image and details */
   display: flex;
-  flex-direction: column; /* Stack info vertically for mobile */
+  flex-direction: column;
   align-items: center;
-  margin-top: 20px;
 }
 
-.card-info {
-  text-align: center;
+.card-image {
+  flex-shrink: 0; /* Prevent the image from shrinking */
+  margin-right: 20px; /* Add some space between the image and the details */
 }
 
-@media (min-width: 768px) { /* Adjust based on your breakpoints */
+
+.card-info, .card-art {
+  margin-bottom: 10px; /* Add some space between the info and art */
+}
+
+.card-art {
+  align-self: stretch; /* Stretch the art container to take full width */
+}
+
+.btn-container {
+  margin-bottom: 10px; /* Add some space above the button */
+}
+
+/* Add your responsive adjustments as necessary, for example: */
+@media (max-width: 600px) {
+  .card-view-container {
+    flex-direction: column; /* Stack the image and details vertically on small screens */
+  }
+
+  .card-image {
+    margin-bottom: 10px; /* Add space between the image and the details */
+  }
+
   .card-details {
-    flex-direction: row; /* Place info side by side with card on larger screens */
-    align-items: flex-start;
+    width: 100%; /* Full width on small screens */
   }
-  
-  .card-image img {
-    max-height: 70vh; /* Adjust the size of the image on larger screens */
-  }
-  
-  .card-info {
-    margin-left: 20px; /* Add some space between the card and the info text */
+
+  .card-art img {
+    width: 100%; /* Full width for the art image */
   }
 }
 
-.card-art img {
-  max-width: 100%;
-  margin-top: 20px;
-}
-
-#goBack {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
