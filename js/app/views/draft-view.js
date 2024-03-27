@@ -4,7 +4,7 @@ define(function () {
     let handlers = {};
 
     function createButton() {
-        return "<button id='goBack' style='display:flex; border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'> Go back </button>";
+        return "<button id='goBack' > Go back </button>";
     }
 
     externals.bind = function (event, handler) {
@@ -24,6 +24,7 @@ define(function () {
     externals.render = function (card) {
         if (!elements.app) {
             elements.app = $("#app");
+          
         }
 
         renderButton();
@@ -84,19 +85,7 @@ define(function () {
     externals.renderSidebar = function (sideList) {
         if (!elements.sideCard) {
             elements.sideCard = $("<div id='sideList' class='side-container'></div>");
-            elements.sideCard.css({
-                "display": "flex",
-                "flex-direction": "column",
-                "position": "fixed",
-                "top": "0",
-                "right": "0",
-                "bottom": "0",
-                "width": "300px",
-                "background-color": "#f8f8f8",
-                "padding": "10px",
-                "overflow-y": "auto"
-
-            });
+        
         }
 
         elements.sideCard.empty();

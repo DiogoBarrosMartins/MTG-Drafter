@@ -6,7 +6,7 @@ define(function () {
 
 
   function createButton() {
-    return "<button id = 'goBack' style='display:flex; border: 1px solid; margin-top: 30px; margin-left: 200px; margin-right: 30px;'> Go back </button>";
+    return "<button id = 'goBack'> Go back </button>";
   }
 
   externals.bind = function (event, handler) {

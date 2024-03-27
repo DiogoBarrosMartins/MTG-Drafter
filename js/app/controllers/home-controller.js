@@ -4,7 +4,7 @@ define(["views/home-view", "views/card-view", "services/card-service", "services
   let externals = {};
 
   externals.start = function () {
-    location.reload();
+
     homeview.render();
   };
 
