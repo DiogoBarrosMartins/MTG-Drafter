@@ -1,6 +1,6 @@
 
 define(function () {
-    let externals = {}; // module external api
+    let externals = {}; 
     let routes = {
         card: {
             hash: "#card",
@@ -41,10 +41,20 @@ define(function () {
             window.onhashchange = function () {
                 initController(getRoute());
             };
+            $(document).ready(function() {
+                if (!window.location.hash) {
+                    window.location.hash = '#home';
+                } else {
+                    initController(getRoute());
+                }
+            });
+        
         } catch (err) {
             alert(err);
             window.location.hash = 'home';
+            
         }
+      
     };
     return externals;
 });

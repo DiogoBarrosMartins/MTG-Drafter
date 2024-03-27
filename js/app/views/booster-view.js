@@ -55,7 +55,7 @@ define(function () {
 
   function renderCardList(cardlist) {
 
-    document.body.style.backgroundImage = `url('https://www.mtgnexus.com/img/gallery/5273-serum-visions.jpg')`;
+    app.style.backgroundImage = `url('https://www.mtgnexus.com/img/gallery/5273-serum-visions.jpg')`;
 
     if (!elements.videoCard) {
       elements.videoCard = $("<div id='cardList' class='card-container'></div>");

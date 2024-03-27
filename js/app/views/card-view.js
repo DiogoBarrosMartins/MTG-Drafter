@@ -5,31 +5,12 @@ define(function () {
   let handlers = {};
 
 
-  function createButton() {
-    return "<button id = 'goBack'> Go back </button>";
-  }
-
-  externals.bind = function (event, handler) {
-    handlers[event] = handler;
-  };
-
-  function renderButton() {
-    if (elements.button) {
-      return;
-    }
-    elements.app.empty();
-    elements.button = $(createButton());
-    elements.button.click(handlers["buttonHomeClick"]);
-    elements.app.append(elements.button);
-  }
-
   externals.render = function (card) {
     if (!elements.app) {
       elements.app = $("#app");
     }
-
+    elements.app.empty(); 
     renderButton();
-
     if (card) {
       renderCard(card);
     }
@@ -38,22 +19,28 @@ define(function () {
   };
 
 
+  function renderButton() {
+    elements.button = $("<button id='goBack'>Go back</button>");
+    elements.button.click(handlers["buttonHomeClick"]);
+    elements.app.append(elements.button);
+  }
 
+
+  externals.bind = function (event, handler) {
+    handlers[event] = handler;
+  };
 
 
   function renderCard(card) {
     if (elements.videoCard) {
       elements.videoCard.empty();
     }
-
     elements.videoCard = $(createCard(card));
     elements.app.append(elements.videoCard);
   }
 
 
-
   externals.renderMany = function (cardlist) {
-
     if (!elements.app) {
       elements.app = $("#app");
     }
@@ -74,24 +61,31 @@ define(function () {
     elements.app.append(elements.videoCard);
   }
 
-
   function createCard(card) {
-    return `<div> 
-         <img src="${card.card}"</>
-          <p>Name: ${card.name}</p> 
-          <p>Flavour: ${card.flavour ? card.flavour : "No flavour available"}</p> 
-          <img src="${card.art}"</> 
-          </div>`;
+    return `
+      <div class="card-view-container">
+        <div class="card-image">
+          <img src="${card.card}" alt="Card image" />
+        </div>
+        <div class="card-info">
+          <h2>${card.name}</h2>
+          <p>${card.flavour || "No flavour text available"}</p>
+        </div>
+        <div class="card-art">
+          ${card.art ? `<img src="${card.art}" alt="Art of ${card.name}" />` : ""}
+        </div>
+      </div>`;
   }
+  
 
 
   function createCardList(cardlist) {
-    $("#cardList").append(`<div style="margin-right:10px; margin-left:10px;>
-    <p style="margin-left:36px;"> ${cardlist.name}</p> 
-         <img src="${cardlist.card}" </>
-          
-          </div>`)
+    $("#cardList").append(`
+      <p>${cardlist.name}</p> 
+      <img src="${cardlist.card}"</>
+    `)
   }
+
 
   return externals;
 });
