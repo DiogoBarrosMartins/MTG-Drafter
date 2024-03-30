@@ -12,7 +12,7 @@ define(["views/card-view", "services/card-service"], function (view, service) {
   externals.start = function () {
     console.log("here");
     bindHomeEventHandler();
-    
+
     service.getRandomCard(function (data) {
       view.render(data);
     });

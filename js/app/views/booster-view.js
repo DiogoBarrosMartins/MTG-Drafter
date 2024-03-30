@@ -31,7 +31,6 @@ define(function () {
     if (card) {
       renderCard(card);
     }
-
   };
 
   function renderCard(card) {
@@ -43,7 +42,6 @@ define(function () {
     elements.app.append(elements.videoCard);
   }
 
-
   function createCard(card) {
     return `<div> 
       <img src="${card.card}"</>
@@ -54,11 +52,10 @@ define(function () {
   }
 
   function renderCardList(cardlist) {
-
-    app.style.backgroundImage = `url('https://www.mtgnexus.com/img/gallery/5273-serum-visions.jpg')`;
-
     if (!elements.videoCard) {
-      elements.videoCard = $("<div id='cardList' class='card-container'></div>");
+      elements.videoCard = $(
+        "<div id='cardList' class='card-container'></div>"
+      );
     }
 
     elements.videoCard.empty();
@@ -79,23 +76,16 @@ define(function () {
     elements.app.append(elements.videoCard);
   }
 
-
-
-
   externals.renderMany = function (cardlist) {
-
     if (!elements.app) {
       elements.app = $("#app");
     }
 
     renderButton();
-    console.log("rendermany")
-    console.log(cardlist)
+    console.log("rendermany");
+    console.log(cardlist);
     renderCardList(cardlist);
   };
-
-
-
 
   return externals;
 });

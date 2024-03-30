@@ -1,7 +1,6 @@
 define(function () {
   let externals = {};
 
-
   function renderButton(app) {
     app.append(`<div id="button-container">
                   <button id="random"> Random Card?</button>
@@ -15,38 +14,35 @@ define(function () {
     bindButtonHandlers();
   }
 
-            
   function bindButtonHandlers() {
-    $('#random').click(function () {
-    window.location.hash = 'card';
+    $("#random").click(function () {
+      window.location.hash = "card";
     });
-    $('#search-btn').click(function () {
-    if ($("#search").val() == '') { 
-    window.location.hash = '#home'; 
-    } else {
-    window.location.hash = 'scry';
-    }});
-    $('#clear-btn').click(function () {
-    $("#search").val('');
-    window.location.hash = '#home';
+    $("#search-btn").click(function () {
+      let searchQuery = $("#search").val().trim();
+      if (searchQuery === "") {
+        window.location.hash = "#home";
+      } else {
+        window.location.hash = `scry?query=${encodeURIComponent(searchQuery)}`;
+      }
     });
-    $('#booster-btn').click(function () {
-    window.location.hash = 'booster';
+    $("#clear-btn").click(function () {
+      $("#search").val("");
+      window.location.hash = "#home";
     });
-    $('#draft-btn').click(function () {
-    window.location.hash = 'draft';
+    $("#booster-btn").click(function () {
+      window.location.hash = "booster";
+    });
+    $("#draft-btn").click(function () {
+      window.location.hash = "draft";
     });
   }
 
-
   externals.render = function () {
     let app = $("#app");
-    app.empty(); 
-    //this removes the background from the search
-    app.css("backgroundImage", "none");
+    app.empty();
     renderButton(app);
   };
 
-  
   return externals;
 });
