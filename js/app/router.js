@@ -35,7 +35,7 @@ define(function () {
   function initController(route) {
     if (!route || !route.controller) {
       console.error("No route or controller found for:", route);
-      window.location.hash = "#home"; // Redirect to home if route is undefined
+      window.location.hash = "#home";
       return;
     }
 

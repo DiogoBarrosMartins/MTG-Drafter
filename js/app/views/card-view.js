@@ -81,7 +81,6 @@ define(function () {
       window.location.hash = "#home";
     } else {
       window.location.hash = `#scry?query=${encodeURIComponent(searchQuery)}`;
-      // Assuming you have a way to inform the controller, like an event emitter or direct function call
       if (typeof handlers["search"] === "function") {
         handlers["search"](searchQuery);
       }
