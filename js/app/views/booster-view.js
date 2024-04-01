@@ -3,8 +3,15 @@ define(function () {
   let elements = {};
   let handlers = {};
 
+  function initElements() {
+    elements.app = elements.app || document.getElementById('app');
+  }
+
   function createButton() {
-    return "<button id='goBack'> Go back </button>";
+    let button = document.createElement('button');
+    button.id = 'goBack';
+    button.textContent = 'Go back';
+    return button;
   }
 
   externals.bind = function (event, handler) {
@@ -15,17 +22,74 @@ define(function () {
     if (elements.button) {
       return;
     }
-    elements.app.empty();
-    elements.button = $(createButton());
-    elements.button.click(handlers["buttonHomeClick"]);
-    elements.app.append(elements.button);
+
+    elements.app.innerHTML = ''; 
+    elements.button = createButton();
+    elements.button.addEventListener('click', handlers["buttonHomeClick"]);
+    elements.app.appendChild(elements.button);
+  }
+
+  function renderCard(card) {
+    if (!elements.videoCard) {
+      elements.videoCard = document.createElement('div');
+      elements.app.appendChild(elements.videoCard);
+    } else {
+      elements.videoCard.innerHTML = ''; 
+    }
+
+    elements.videoCard.appendChild(createCard(card));
+  }
+
+  function createCard(card) {
+    let cardDiv = document.createElement('div');
+    
+    let cardImg = document.createElement('img');
+    cardImg.src = card.card;
+    cardDiv.appendChild(cardImg);
+    
+    let cardName = document.createElement('p');
+    cardName.textContent = `Name: ${card.name}`;
+    cardDiv.appendChild(cardName);
+    
+    let cardFlavour = document.createElement('p');
+    cardFlavour.textContent = `Flavour: ${card.flavour ? card.flavour : "No flavour available"}`;
+    cardDiv.appendChild(cardFlavour);
+
+    if (card.art) {
+      let cardArt = document.createElement('img');
+      cardArt.src = card.art;
+      cardDiv.appendChild(cardArt);
+    }
+    
+    return cardDiv;
+  }
+
+  function renderCardList(cardlist) {
+    elements.videoCard = elements.videoCard || document.createElement('div');
+    elements.videoCard.id = 'cardList';
+    elements.videoCard.className = 'card-container';
+    elements.videoCard.innerHTML = ''; 
+
+    cardlist.forEach(card => {
+      elements.videoCard.appendChild(createCardListItem(card));
+    });
+
+    elements.app.appendChild(elements.videoCard);
+  }
+
+  function createCardListItem(card) {
+    let cardDiv = document.createElement('div');
+    cardDiv.className = 'card';
+    
+    let cardImg = document.createElement('img');
+    cardImg.src = card.card;
+    cardDiv.appendChild(cardImg);
+
+    return cardDiv;
   }
 
   externals.render = function (card) {
-    if (!elements.app) {
-      elements.app = $("#app");
-    }
-
+    initElements();
     renderButton();
 
     if (card) {
@@ -33,57 +97,10 @@ define(function () {
     }
   };
 
-  function renderCard(card) {
-    if (elements.videoCard) {
-      elements.videoCard.empty();
-    }
-
-    elements.videoCard = $(createCard(card));
-    elements.app.append(elements.videoCard);
-  }
-
-  function createCard(card) {
-    return `<div> 
-      <img src="${card.card}"</>
-      <p>Name: ${card.name}</p> 
-      <p>Flavour: ${card.flavour ? card.flavour : "No flavour available"}</p> 
-      <img src="${card.art}"</> 
-      </div>`;
-  }
-
-  function renderCardList(cardlist) {
-    if (!elements.videoCard) {
-      elements.videoCard = $(
-        "<div id='cardList' class='card-container'></div>"
-      );
-    }
-
-    elements.videoCard.empty();
-
-    if (cardlist && cardlist.length > 0) {
-      let cardHtml = "";
-      for (let i = 0; i < cardlist.length; i++) {
-        let card = cardlist[i];
-        cardHtml += `
-        <div class='card'>
-          
-          <img src='${card.card}' />
-        </div>
-      `;
-      }
-      elements.videoCard.html(cardHtml);
-    }
-    elements.app.append(elements.videoCard);
-  }
-
   externals.renderMany = function (cardlist) {
-    if (!elements.app) {
-      elements.app = $("#app");
-    }
-
+    initElements();
     renderButton();
-    console.log("rendermany");
-    console.log(cardlist);
+    console.log("rendermany", cardlist);
     renderCardList(cardlist);
   };
 
