@@ -1,21 +1,43 @@
 define(function () {
   let externals = {};
 
-  externals.getRandomCard = function (callbackFunction) {
-    fetch("https://api.scryfall.com/cards/random")
-      .then((response) => response.json())
+  async function fetchWithRetry(url, retries = 5) {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
 
-      .then(function (response) {
-        return {
-          name: response.name,
-          card: response.image_uris.normal,
-          flavour: response.flavor_text,
-          art: response.image_uris.art_crop,
-        };
-      })
-      .then(function (card) {
-        callbackFunction(card);
-      });
+      if (!data.image_uris || !data.image_uris.normal) {
+        if (retries > 0) {
+          console.log("Retry fetching card due to missing 'normal' image.");
+          return fetchWithRetry(url, retries - 1);
+        } else {
+          throw new Error("Max retries reached");
+        }
+      }
+
+      return data;
+    } catch (error) {
+      console.error("Fetch failed:", error);
+      throw error;
+    }
+  }
+
+  externals.getRandomCard = async function (callbackFunction) {
+    try {
+      const cardData = await fetchWithRetry(
+        "https://api.scryfall.com/cards/random"
+      );
+      const card = {
+        name: cardData.name,
+        card: cardData.image_uris.normal,
+        flavour: cardData.flavor_text,
+        art: cardData.image_uris.art_crop,
+      };
+      callbackFunction(card);
+    } catch (error) {
+      console.error("Error in getRandomCard:", error);
+      callbackFunction(null, error);
+    }
   };
 
   externals.getCardDetailsByName = async function (searchInput) {
@@ -91,7 +113,6 @@ define(function () {
   };
 
   externals.generateRandomBooster = async function (setCode, callbackFunction) {
-    // Fetch all cards from the set
     const response = await fetch(
       `https://api.scryfall.com/cards/search?q=set:${setCode}`
     )
