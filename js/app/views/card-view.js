@@ -3,12 +3,11 @@ define(function () {
   let elements = {};
   let handlers = {};
 
-  
-
   externals.bind = function (event, handler) {
     handlers[event] = handler;
   };
-externals.render = function (card) {
+
+  externals.render = function (card) {
     if (!elements.app) {
       elements.app = $("#app");
     }
@@ -20,6 +19,7 @@ externals.render = function (card) {
       renderButton();
     }
   };
+  
   externals.renderMany = function (input) {
     if (!elements.app) {
       elements.app = $("#app");
@@ -130,6 +130,80 @@ externals.render = function (card) {
     return cardViewContainer;
   }
 
+  function createElementForScryViewContainer() {
+    const container = document.createElement("div");
+    container.id = "scry-view-container";
+    elements.app.append(container);
+    return container;
+  }
+
+  function renderCardList(cardlist) {
+    if (elements.videoCard) {
+      elements.videoCard.empty();
+    }
+    elements.videoCard = $(createCardList(cardlist));
+    elements.app.append(elements.videoCard);
+  }
+
+
+  function createCardList(cards) {
+    const scryViewContainer = document.createElement("div");
+    scryViewContainer.className = "scry-view-container";
+
+    const btnContainer = document.createElement("div");
+    btnContainer.id = "btn-container";
+
+    const goBackButton = document.createElement("button");
+    goBackButton.id = "goBack";
+    goBackButton.textContent = "Go back";
+    btnContainer.appendChild(goBackButton);
+
+    const searchInput = document.createElement("input");
+    searchInput.type = "text";
+    searchInput.id = "search";
+    searchInput.name = "search-field";
+    btnContainer.appendChild(searchInput);
+
+    const searchButton = document.createElement("button");
+    searchButton.id = "search-btn";
+    searchButton.textContent = "Search";
+    btnContainer.appendChild(searchButton);
+
+    const clearButton = document.createElement("button");
+    clearButton.id = "clear-btn";
+    clearButton.textContent = "Clear";
+    btnContainer.appendChild(clearButton);
+    scryViewContainer.appendChild(btnContainer);
+
+    const scryCardContainer = document.createElement("div");
+    scryCardContainer.className = "scry-card-container";
+    scryViewContainer.appendChild(scryCardContainer);
+
+    cards.forEach((card) => {
+      const cardDiv = document.createElement("div");
+      cardDiv.className = "scry-card";
+      cardDiv.setAttribute("data-card-name", card.name);
+
+      const cardName = document.createElement("h1");
+      cardName.className = "scry-card-name";
+      cardName.textContent = card.name;
+
+      const cardImgDiv = document.createElement("div");
+      cardImgDiv.className = "scry-card-image";
+
+      const cardImg = document.createElement("img");
+      cardImg.src = card.card;
+      cardImg.alt = card.name;
+
+      cardImgDiv.appendChild(cardName);
+      cardImgDiv.appendChild(cardImg);
+      cardDiv.appendChild(cardImgDiv);
+      scryCardContainer.appendChild(cardDiv);
+    });
+
+    return scryViewContainer;
+  }
+
   $(document).on("click", "#goBack", function () {
     window.location.hash = "#home";
   });
@@ -152,50 +226,6 @@ externals.render = function (card) {
       }
     }
   });
-
-  function createElementForScryViewContainer() {
-    const container = document.createElement("div");
-    container.id = "scry-view-container";
-    elements.app.append(container);
-    return container;
-  }
-
-  function renderCardList(cardlist) {
-    if (elements.videoCard) {
-      elements.videoCard.empty();
-    }
-    elements.videoCard = $(createCardList(cardlist));
-    elements.app.append(elements.videoCard);
-  }
-
-  function createCardList(cards) {
-    let buttons = `
-      <div id="btn-container">
-        <button id="goBack">Go back</button> 
-        <input type="text" id="search" name="search-field">
-        <button id="search-btn"> Search </button></form>
-      </div>`;
-
-    let scryViewContainer = $('<div class="scry-view-container"></div>');
-    scryViewContainer.append(buttons);
-    let scryCardContainer = $('<div class="scry-card-container"></div>');
-    scryViewContainer.append(scryCardContainer);
-
-    cards.forEach(function (card) {
-      let cardDiv = $(
-        '<div class="scry-card" data-card-name="' + card.name + '"></div>'
-      );
-
-      let cardImgDiv = $(`<h1 class="scry-card-name">${card.name}</h1>
-        <div class="scry-card-image"></div> 
-        <img src="${card.card}" alt="${card.name}">`);
-
-      cardDiv.append(cardImgDiv);
-      scryCardContainer.append(cardDiv);
-    });
-
-    return scryViewContainer;
-  }
-
+  
   return externals;
 });
