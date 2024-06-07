@@ -1,5 +1,5 @@
 # MTG-Drafter
-
+A MTG APP TO SEARCH FOR CARDS WITH NO ADDS. HEHE
 
 A single page application interactive web application designed for Magic: The Gathering (MTG) enthusiasts. This project allows users to search for MTG cards by name, view detailed card information, and explore card art. Leveraging the Scryfall API, it offers a seamless and intuitive interface for discovering and appreciating the art and details of MTG cards.
 It also simulates boosters, it also simmulates a draft table with different boosters on each player hands.
